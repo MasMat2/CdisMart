@@ -19,5 +19,6 @@ namespace CdisMart_DAL
         public string email { get; set; }
         public string nombre_usuario { get; set; }
         public string contrasena { get; set; }
+        public string apellido { get; set; }
     }
 }

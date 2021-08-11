@@ -21,9 +21,10 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nombre_usuario" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="contrasena" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CdisMartModelStoreContainer">
           <EntitySet Name="Subasta" EntityType="Self.Subasta" Schema="dbo" store:Type="Tables" />
@@ -45,7 +46,8 @@
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="nombre_usuario" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="contrasena" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="contrasena" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Subasta">
           <Key>
@@ -66,6 +68,7 @@
         <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="CdisMartModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
                 <ScalarProperty Name="contrasena" ColumnName="contrasena" />
                 <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
                 <ScalarProperty Name="email" ColumnName="email" />

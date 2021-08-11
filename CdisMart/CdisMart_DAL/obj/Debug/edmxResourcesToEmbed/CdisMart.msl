@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="CdisMartModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
           <ScalarProperty Name="contrasena" ColumnName="contrasena" />
           <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
           <ScalarProperty Name="email" ColumnName="email" />

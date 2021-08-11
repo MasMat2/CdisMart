@@ -16,9 +16,10 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="nombre_usuario" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="contrasena" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityContainer Name="CdisMartModelStoreContainer">
     <EntitySet Name="Subasta" EntityType="Self.Subasta" Schema="dbo" store:Type="Tables" />

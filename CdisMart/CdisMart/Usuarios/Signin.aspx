@@ -59,7 +59,7 @@
     </form>--%>
 
     <div class="container ">
-        <form class="row g-3" runat="server">
+        <form id="form1" class="row g-3" runat="server">
             <h1>Unete a la comunidad CdisMart!</h1>
             <div class="col-md-6">
                 <label for="txtNombre" class="form-label">Nombre</label>

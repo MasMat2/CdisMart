@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using CdisMart_DAL;
 using CdisMart_BLL;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace CdisMart.Subastas
 {
@@ -15,31 +16,55 @@ namespace CdisMart.Subastas
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Session["usuario"] != null)
+                {
+                }
+                else
+                {
+                    Response.Redirect("~/Usuarios/Login.aspx");
+                }
+            }
 
         }
 
         protected void btnCrearClick(object sender, EventArgs e)
         {
             crearSubasta();
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('Subasta creada exitosamente.')", true);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('Subasta creada exitosamente')", true);
             //Response.Redirect("~/Login.aspx");
         }
         #endregion
 
         #region Metodos
-
+        #region BLL
         public void crearSubasta()
         {
             Subasta subasta = new Subasta();
             subasta.nombre = txtNombre.Text;
             subasta.descripcion = txtDescripcion.Text;
-            subasta.fecha_fin = DateTime.ParseExact(txtFechaInicio.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture);
-            subasta.fecha_fin = DateTime.ParseExact(txtFechaFin.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture);
-
+            (subasta.fecha_inicio, subasta.fecha_fin) = parseDateText();
             SubastaBLL subastaBLL = new SubastaBLL();
             subastaBLL.crearSubasta(subasta);
         }
+        #endregion
 
+        #region Helpers
+        public (DateTime, DateTime) parseDateText()
+        {
+            string format = "dd/MM/yyyy HH:mm";
+            Regex rx = new Regex(@"(\d{2}/\d{2}/\d{4} \d{2}:\d{2})");
+            MatchCollection matches = rx.Matches(txtFecha.Text);
+            List<DateTime> dateTimes = new List<DateTime>();
+            foreach (Match match in matches)
+            {
+                dateTimes.Add(DateTime.ParseExact(match.Value, format, CultureInfo.InvariantCulture));
+            }
+            return (dateTimes[0], dateTimes[1]);
+
+        }
+        #endregion
         #endregion
     }
 }

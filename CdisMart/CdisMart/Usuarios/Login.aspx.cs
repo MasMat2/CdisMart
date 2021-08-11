@@ -22,18 +22,13 @@ namespace CdisMart.Usuarios
         {
             if (usuarioValido())
             {
-                Response.Redirect("~/Facultades/facultad_s.aspx");
+                Response.Redirect("~/Subastas/subasta_i.aspx");
             }
             else
             {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Sesion", "alert('Usuario y/o contraseña incorrectos.')", true);
             }
 
-        }
-
-        public void btnSignIn_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Signin.aspx");
         }
         #endregion
 

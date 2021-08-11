@@ -21,7 +21,7 @@ namespace CdisMart
         {
             registrarUsuario();
             Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('Usuario registrado exitosamente.')", true);
-            Response.Redirect("~/Login.aspx");
+            //Response.Redirect("~/Login.aspx");
         }
         #endregion
 

@@ -1,57 +1,68 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CdisMart.Master" AutoEventWireup="true" CodeBehind="subasta_i.aspx.cs" Inherits="CdisMart.Subastas.subasta_i" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="./Subastas.Master" AutoEventWireup="true" CodeBehind="subasta_i.aspx.cs" Inherits="CdisMart.Subastas.subasta_i" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Crear subasta</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <table class="table table-bordered custom_tables">
-        <tr>
-            <td>Nombre del producto: </td>
-            <td>
-                <asp:TextBox ID="txtNombre" runat="server" MaxLength="50"></asp:TextBox>
+    <div class="container ">
+        <form id="form1" class="row g-3" runat="server">
+            <h1>Crea una subasta!</h1>
+            <div class="col-md-6">
+                <label for="txtNombre" class="form-label">Nombre del producto</label>
+                <asp:TextBox ID="txtNombre" runat="server" MaxLength="50" class="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfv_nombre" runat="server"
-                    ErrorMessage="El nombre del producto es requerido" ControlToValidate="txtNombre"
+                    ErrorMessage="*" ControlToValidate="txtNombre"
                     ValidationGroup="vlg1" Display="Dynamic"></asp:RequiredFieldValidator>
-            </td>
-        </tr>
-        <tr>
-            <td>Descripción del producto: </td>
-            <td>
-                <asp:TextBox ID="txtDescripcion" runat="server" MaxLength="100" TextMode="MultiLine"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfv_descripcion" runat="server"
-                    ErrorMessage="La descripcion del producto es requerida" 
-                    ControlToValidate="txtDescripcion" ValidationGroup="vlg1" Display="Dynamic"></asp:RequiredFieldValidator>
-
-            </td>
-        </tr>
-        <tr>
-            <td>Fecha de inicio: </td>
-            <td>
-                <asp:TextBox ID="txtFechaInicio" runat="server" autocomplete="off"></asp:TextBox>
+            </div>
+            <div class="col-md-6">
+                <label for="txtFecha" class="form-label">Fecha de inicio</label>
+                <asp:TextBox ID="txtFecha" runat="server" autocomplete="off" class="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfv_fechaInicio" runat="server"
-                    ErrorMessage="La fecha de incio es requerida" ControlToValidate="txtFechaInicio"
+                    ErrorMessage="*" ControlToValidate="txtFecha"
                     ValidationGroup="vlg1" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:CompareValidator ID="cv_fechaInicio" runat="server"
-                    ErrorMessage="El formato de fecha es incorrecto (dd/mm/yyyy) o (mm/dd/yyyy)"
-                    ControlToValidate="txtFechaInicio" Type="Date" Operator="DataTypeCheck"
-                    ValidationGroup="vlg1" Display="Dynamic"></asp:CompareValidator>
-            </td>
-        </tr>
-        <tr>
-            <td>Fecha de fin: </td>
-            <td>
-                <asp:TextBox ID="txtFechaFin" runat="server" autocomplete="off"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfv_fechaFin" runat="server"
-                    ErrorMessage="La fecha de fin es requerida" ControlToValidate="txtFechaFin"
-                    ValidationGroup="vlg1" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:CompareValidator ID="cv_fechaFin" runat="server"
-                    ErrorMessage="El formato de fecha es incorrecto (dd/mm/yyyy) o (mm/dd/yyyy)"
-                    ControlToValidate="txtFechaFin" Type="Date" Operator="DataTypeCheck"
-                    ValidationGroup="vlg1" Display="Dynamic"></asp:CompareValidator>
-            </td>
-        </tr>
-    </table>
 
-    <asp:Button ID="Button1" runat="server" Text="Registrar" OnClick="btnCrearClick" ValidationGroup="vlg1" />
+            </div>
+            <div class="col-md-6">
+                <label for="txtDescripcion" class="form-label">Descripción del producto</label>
+                <asp:TextBox ID="txtDescripcion" runat="server" MaxLength="100" TextMode="MultiLine" class="form-control"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfv_descripcion" runat="server"
+                    ErrorMessage="*"
+                    ControlToValidate="txtDescripcion" ValidationGroup="vlg1" Display="Dynamic"></asp:RequiredFieldValidator>
+            </div>
+            <div class="col-md-12">
+                <asp:Button ID="Button1" runat="server" Text="Registrar" OnClick="btnCrearClick" ValidationGroup="vlg1" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
 
+            function load_plugins() {
+                $("#ContentPlaceHolder1_txtFecha").daterangepicker({
+                    timePicker: true,
+                    startDate: moment().startOf('hour'),
+                    minDate: moment().startOf('hour'),
+                    endDate: moment().startOf('hour').add(32, 'hour'),
+                    locale: {
+                        format: 'DD/MM/YYYY hh:mm A',
+                        direction: 'ltr',
+                        separator: ' - ',
+                        applyLabel: 'Aplicar',
+                        cancelLabel: 'Cancelar',
+                        weekLabel: 'W',
+                        customRangeLabel: 'Rango de fecha',
+                        daysOfWeek: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                        monthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                        firstDay: moment.localeData().firstDayOfWeek()
+                    }
+                });
+            }
+
+            load_plugins();
+
+            //var manager = Sys.WebForms.PageRequestManager.getInstance();
+
+            //manager.add_endRequest(load_plugins);
+        });
+    </script>
 </asp:Content>

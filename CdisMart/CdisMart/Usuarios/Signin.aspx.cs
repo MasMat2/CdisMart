@@ -20,8 +20,7 @@ namespace CdisMart.Usuarios
         protected void btnRegistrarClick(object sender, EventArgs e)
         {
             registrarUsuario();
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('Usuario registrado exitosamente.')", true);
-            Response.Redirect("~/Login.aspx");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", String.Format("alert('{0}');location.href='{1}'", "Usuario registrado exitosamente", "./Login.aspx"), true);
         }
         #endregion
 
@@ -31,17 +30,25 @@ namespace CdisMart.Usuarios
         {
             Usuario user = new Usuario();
             user.nombre = txtNombre.Text;
+            user.apellido = txtApellido.Text;
             user.email = txtEmail.Text;
             user.nombre_usuario = txtNombreUsuario.Text;
             user.contrasena = txtContrasena.Text;
             if (txtContrasena.Text == txtContrasenaConfirmacion.Text)
             {
                 UsuarioBLL userBLL = new UsuarioBLL();
-                userBLL.registrarUsuario(user);
+                try
+                {
+                    userBLL.registrarUsuario(user);
+                }
+                catch (Exception ex)
+                {
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", String.Format("alert('{0}')", ex.Message), true);
+                }
             }
             else
             {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('La confirmación de contrasena es incorrecta.')", true);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('Las contraseñas no coinciden')", true);
             }
         }
         #endregion
