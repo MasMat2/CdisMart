@@ -33,7 +33,7 @@ namespace CdisMart_DAL
 
             return usuario;
         }
-        public void agregarUsuario(Usuario usuario)
+        public void registrarUsuario(Usuario usuario)
         {
             modelo.Usuario.Add(usuario);
             modelo.SaveChanges();

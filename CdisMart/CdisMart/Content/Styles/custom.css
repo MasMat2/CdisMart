@@ -1,0 +1,16 @@
+﻿li{
+    margin: 0 5px;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+.btnLogin{
+    margin-right: 10px;
+}
+
+a {
+    text-decoration: none;
+}

@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="bcdd9750e2f144388b95724e0ae24f08" Name="Diagram1">
         <EntityTypeShape EntityType="CdisMartModel.Usuario" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CdisMartModel.Subasta" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

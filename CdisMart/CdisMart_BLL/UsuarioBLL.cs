@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using CdisMart_DAL;
 
 namespace CdisMart_BLL
@@ -16,18 +17,26 @@ namespace CdisMart_BLL
             return user.consultarUsuario(nombre_usuario, contrasena);
         }
 
-        public void agregarUsuario(Usuario usuario)
-        {   
+        public void registrarUsuario(Usuario usuario)
+        {
             UsuarioDAL userDAL = new UsuarioDAL();
             Usuario usuarioCargado;
 
             usuarioCargado = userDAL.consultarNombreUsuario(usuario.nombre_usuario);
 
-            if(usuarioCargado != null)
+            if (usuarioCargado != null)
             {
-                throw new Exception("El nombre de usuario ya existe en la base de datos");
+                throw new Exception("El nombre de usuario ya existe en la base de datos.");
             }
-            userDAL.agregarUsuario(usuario);
+            else
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    userDAL.registrarUsuario(usuario);
+                    ts.Complete();
+                }
+            }
         }
+
     }
 }

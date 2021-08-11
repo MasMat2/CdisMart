@@ -3,6 +3,13 @@
     font-size: 18px;
 }
 
+/*form{
+    width: 50%;
+    margin: 100px auto;
+    border: 1px solid blue;
+    box-shadow: grey 5px 5px;
+    padding-bottom: 20px;
+}*/
 
 #formLogin {
     width: 50%;
@@ -12,6 +19,13 @@
     padding-bottom: 20px;
 }
 
+#formSignin {
+    position: absolute;
+    width: auto;
+    margin: 10% 0 0 5%;
+    border: 1px solid blue;
+    box-shadow: grey 5px 5px;
+}
 #imgLogin {
     content: url("../Images/logo_cdis.jpg");
     width: 70%;

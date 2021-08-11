@@ -26,5 +26,6 @@ namespace CdisMart_DAL
         }
     
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Subasta> Subasta { get; set; }
     }
 }
