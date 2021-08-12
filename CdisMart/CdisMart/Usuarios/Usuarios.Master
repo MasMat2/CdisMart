@@ -18,7 +18,7 @@
             <a href="./index.aspx" class="navbar-brand flex-center">
                 <img src="../Content/Images/bootstrap-fill.svg" alt="Cdis logo"  width="30" height="24"
                 class="d-inline-block align-top">
-                <span class="d-inline-block align-top">CdisMart</span>
+                <span class="d-inline-block align-top ms-5">CdisMart</span>
             </a>
             <button 
                 class="navbar-toggler"

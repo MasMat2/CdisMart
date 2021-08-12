@@ -16,7 +16,15 @@ namespace CdisMart_DAL
         {
             modelo = new CdisMartEntities();
         }
-        public Usuario consultarUsuario(string nombre_usuario, string contrasena)
+
+        public Usuario consultarUsuario(int id)
+        {
+            var usuario = (from mUsuario in modelo.Usuario
+                           where mUsuario.id == id
+                           select mUsuario).FirstOrDefault();
+            return usuario;
+        }
+        public Usuario validarUsuario(string nombre_usuario, string contrasena)
         {
             var usuario = (from mUsuario in modelo.Usuario
                            where mUsuario.nombre_usuario == nombre_usuario && mUsuario.contrasena == contrasena

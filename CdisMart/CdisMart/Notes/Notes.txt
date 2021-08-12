@@ -3,3 +3,9 @@ Preferably if implment with bootstrap
 
 
 change page_init to page_load on subastas master, and delete auto add user feature
+
+
+string format = "dd/MM/yyyy HH:mm"; heredada?
+
+
+error with big numbers on update offer for auction

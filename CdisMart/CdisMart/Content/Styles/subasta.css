@@ -1,0 +1,57 @@
+﻿.imagenObjeto {
+    width: 400px;
+    float: left;
+}
+
+.info {
+    float: right;
+}
+
+.justificar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.subasta {
+    width: 100%;
+    background-color: #fbf6f4;
+}
+
+.pad {
+    padding: 40px;
+}
+
+.precio {
+    font-size: 25px;
+}
+
+.round {
+    margin-left: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    font-size: small;
+}
+
+input {
+    width: 50%;
+}
+
+.price-input {
+    margin: 5px 40px;
+}
+
+    .price-input > * {
+        margin: 5px 0px;
+        width: 100%;
+    }
+
+    .price-input > input {
+        outline: none;
+    }
+
+    .price-input > input[type="submit"]{
+        outline: none;
+        color: #fbf6f4;
+        margin-bottom: 40px;
+    }

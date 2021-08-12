@@ -40,5 +40,11 @@ namespace CdisMart_BLL
             SubastaDAL subastaDAL = new SubastaDAL();
             return subastaDAL.cargarSubasta(id);
         }
+
+        public void actualizarOferta(Subasta subasta)
+        {
+            SubastaDAL subastaDAL = new SubastaDAL();
+            subastaDAL.actualizarOferta(subasta);
+        }
     }
 }

@@ -22,7 +22,7 @@
                 <a href="./listado.aspx" class="navbar-brand flex-center">
                     <img src="../Content/Images/bootstrap-fill.svg" alt="Cdis logo" width="30" height="24"
                         class="d-inline-block align-top">
-                    <span class="d-inline-block align-top">CdisMart</span>
+                    <span class="d-inline-block align-top ms-5">CdisMart</span>
                 </a>
                 <button
                     class="navbar-toggler"
@@ -45,6 +45,8 @@
                         </li>
                         <li>
                             <a href="/Usuarios/index.aspx" class="nav-link text-danger">Salir</a>
+                             <asp:Button ID="btnHacerOferta" CssClass="nav-link text-danger" Text="Salir" 
+                                OnClick="btnSalir_Click" runat="server"/>
                         </li>
                     </ul>
                 </div>

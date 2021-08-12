@@ -20,13 +20,14 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="300" />
           <Property Name="fecha_inicio" Type="date" Nullable="false" />
           <Property Name="fecha_cierre" Type="date" Nullable="false" />
           <Property Name="monto_mas_alto" Type="decimal" Precision="9" Scale="2" />
           <Property Name="ganador_id" Type="int" />
           <Property Name="creador_id" Type="int" />
+          <Property Name="imagen_url" Type="varchar" MaxLength="400" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -130,13 +131,14 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="fecha_cierre" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="monto_mas_alto" Type="Decimal" Precision="9" Scale="2" />
           <Property Name="ganador_id" Type="Int32" />
           <Property Name="creador_id" Type="Int32" />
+          <Property Name="imagen_url" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="HistorialSubasta" Relationship="Self.FK_Subasta" FromRole="Subasta" ToRole="HistorialSubasta" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_UsuarioCreador" FromRole="Subasta" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="Self.FK_UsuarioGanador" FromRole="Subasta" ToRole="Usuario" />
@@ -252,6 +254,7 @@
                 <ScalarProperty Name="monto_mas_alto" ColumnName="monto_mas_alto" />
                 <ScalarProperty Name="ganador_id" ColumnName="ganador_id" />
                 <ScalarProperty Name="creador_id" ColumnName="creador_id" />
+                <ScalarProperty Name="imagen_url" ColumnName="imagen_url" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

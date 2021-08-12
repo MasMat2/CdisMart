@@ -27,6 +27,7 @@ namespace CdisMart_DAL
         public Nullable<decimal> monto_mas_alto { get; set; }
         public Nullable<int> ganador_id { get; set; }
         public Nullable<int> creador_id { get; set; }
+        public string imagen_url { get; set; }
     
         public virtual ICollection<HistorialSubasta> HistorialSubasta { get; set; }
         public virtual Usuario Usuario { get; set; }

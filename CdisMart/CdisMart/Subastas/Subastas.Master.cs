@@ -15,7 +15,7 @@ namespace CdisMart.Subastas
         {
             UsuarioDAL userDAL = new UsuarioDAL();
             Usuario userObject;
-            userObject = userDAL.consultarNombreUsuario("TomScott");
+            userObject = userDAL.consultarNombreUsuario("JaneDoe");
             Session["usuario"] = userObject;
             lblNombre.Text = userObject.nombre_usuario;
         }
@@ -27,8 +27,9 @@ namespace CdisMart.Subastas
             lblNombre.Text = nombreCompleto;
         }
 
-        //public ActionResult Students()
-        //{ 
-        //}
+        public void btnSalir_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -23,6 +23,7 @@
           <ScalarProperty Name="monto_mas_alto" ColumnName="monto_mas_alto" />
           <ScalarProperty Name="ganador_id" ColumnName="ganador_id" />
           <ScalarProperty Name="creador_id" ColumnName="creador_id" />
+          <ScalarProperty Name="imagen_url" ColumnName="imagen_url" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -70,10 +70,11 @@
     <Content Include="Content\Styles\bootstrap.css" />
     <Content Include="Content\Styles\custom.css" />
     <Content Include="Content\Styles\login.css" />
-    <Content Include="Login.aspx" />
+    <Content Include="Content\Styles\subasta.css" />
+    <Content Include="Deprecated\Login.aspx" />
     <Content Include="Notes\database.txt" />
     <Content Include="Notes\Notes.txt" />
-    <Content Include="Signin.aspx" />
+    <Content Include="Deprecated\Signin.aspx" />
     <Content Include="Subastas\listado.aspx" />
     <Content Include="Subastas\subasta.aspx" />
     <Content Include="Subastas\subasta_i.aspx" />
@@ -90,19 +91,19 @@
     <Compile Include="CdisMart.Master.designer.cs">
       <DependentUpon>CdisMart.Master</DependentUpon>
     </Compile>
-    <Compile Include="Login.aspx.cs">
+    <Compile Include="Deprecated\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login.aspx.designer.cs">
+    <Compile Include="Deprecated\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Signin.aspx.cs">
+    <Compile Include="Deprecated\Signin.aspx.cs">
       <DependentUpon>Signin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Signin.aspx.designer.cs">
+    <Compile Include="Deprecated\Signin.aspx.designer.cs">
       <DependentUpon>Signin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Subastas\listado.aspx.cs">

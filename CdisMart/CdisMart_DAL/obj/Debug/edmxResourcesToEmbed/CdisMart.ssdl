@@ -15,13 +15,14 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="nombre" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="300" />
     <Property Name="fecha_inicio" Type="date" Nullable="false" />
     <Property Name="fecha_cierre" Type="date" Nullable="false" />
     <Property Name="monto_mas_alto" Type="decimal" Precision="9" Scale="2" />
     <Property Name="ganador_id" Type="int" />
     <Property Name="creador_id" Type="int" />
+    <Property Name="imagen_url" Type="varchar" MaxLength="400" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>

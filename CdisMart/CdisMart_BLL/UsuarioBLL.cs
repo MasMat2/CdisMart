@@ -11,10 +11,23 @@ namespace CdisMart_BLL
 {
     public class UsuarioBLL
     {
-        public Usuario consultarUsuario(string nombre_usuario, string contrasena)
+
+        public Usuario consultarUsuario(int id)
         {
             UsuarioDAL user = new UsuarioDAL();
-            return user.consultarUsuario(nombre_usuario, contrasena);
+            return user.consultarUsuario(id);
+        }
+
+        public Usuario validarUsuario(string nombre_usuario, string contrasena)
+        {
+            UsuarioDAL user = new UsuarioDAL();
+            return user.validarUsuario(nombre_usuario, contrasena);
+        }
+
+        public Usuario consultarNombreUsuario(string nombre_usuario)
+        {
+            UsuarioDAL user = new UsuarioDAL();
+            return user.consultarNombreUsuario(nombre_usuario);
         }
 
         public void registrarUsuario(Usuario usuario)

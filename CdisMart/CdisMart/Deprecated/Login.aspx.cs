@@ -45,7 +45,7 @@ namespace CdisMart
             UsuarioBLL userBLL = new UsuarioBLL();
             Usuario userObject;
 
-            userObject = userBLL.consultarUsuario(txtUsuario.Text, txtContrasena.Text);
+            userObject = userBLL.validarUsuario(txtUsuario.Text, txtContrasena.Text);
 
             if (userObject != null)
             {

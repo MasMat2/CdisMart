@@ -46,6 +46,8 @@ namespace CdisMart.Subastas
             subasta.nombre = txtNombre.Text;
             subasta.descripcion = txtDescripcion.Text;
             (subasta.fecha_inicio, subasta.fecha_cierre) = parseDateText();
+            subasta.ganador_id = 1;
+            subasta.monto_mas_alto = 0;
             SubastaBLL subastaBLL = new SubastaBLL();
             try
             {

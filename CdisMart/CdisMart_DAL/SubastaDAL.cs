@@ -47,5 +47,15 @@ namespace CdisMart_DAL
 
             return subastas.AsEnumerable<Subasta>().ToList();
         }
+
+        public void actualizarOferta(Subasta pSubasta)
+        {
+            var subasta = (from mSubasta in modelo.Subasta
+                           where mSubasta.id == pSubasta.id
+                           select mSubasta).FirstOrDefault();
+            subasta.ganador_id = pSubasta.ganador_id;
+            subasta.monto_mas_alto = pSubasta.monto_mas_alto;
+            modelo.SaveChanges();
+        }
     }
 }

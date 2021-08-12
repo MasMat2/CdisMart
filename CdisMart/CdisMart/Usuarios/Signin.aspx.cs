@@ -29,12 +29,24 @@ namespace CdisMart.Usuarios
         public void registrarUsuario()
         {
             Usuario user = new Usuario();
+            UsuarioBLL usuarioBLL = new UsuarioBLL();
             user.nombre = txtNombre.Text;
             user.apellido = txtApellido.Text;
             user.email = txtEmail.Text;
             user.nombre_usuario = txtNombreUsuario.Text;
             user.contrasena = txtContrasena.Text;
-            if (txtContrasena.Text == txtContrasenaConfirmacion.Text)
+
+
+            Usuario usuarioCreado = usuarioBLL.consultarNombreUsuario(user.nombre_usuario);
+            if(usuarioCreado != null)
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", String.Format("alert('{0}')", "Nombre de usuario no disponible"), true);
+            }
+            else if (txtContrasena.Text != txtContrasenaConfirmacion.Text)
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('Las contraseñas no coinciden')", true);
+            }
+            else
             {
                 UsuarioBLL userBLL = new UsuarioBLL();
                 try
@@ -45,10 +57,6 @@ namespace CdisMart.Usuarios
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", String.Format("alert('{0}')", ex.Message), true);
                 }
-            }
-            else
-            {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('Las contraseñas no coinciden')", true);
             }
         }
         #endregion
