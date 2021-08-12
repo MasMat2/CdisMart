@@ -1,26 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CdisMartModelStoreContainer" CdmEntityContainer="CdisMartEntities">
-    <EntitySetMapping Name="Usuario">
-      <EntityTypeMapping TypeName="CdisMartModel.Usuario">
-        <MappingFragment StoreEntitySet="Usuario">
-          <ScalarProperty Name="apellido" ColumnName="apellido" />
-          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-          <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
+    <EntitySetMapping Name="HistorialSubasta">
+      <EntityTypeMapping TypeName="CdisMartModel.HistorialSubasta">
+        <MappingFragment StoreEntitySet="HistorialSubasta">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="subasta_id" ColumnName="subasta_id" />
+          <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Subasta">
       <EntityTypeMapping TypeName="CdisMartModel.Subasta">
         <MappingFragment StoreEntitySet="Subasta">
-          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
-          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
+          <ScalarProperty Name="monto_mas_alto" ColumnName="monto_mas_alto" />
+          <ScalarProperty Name="ganador_id" ColumnName="ganador_id" />
+          <ScalarProperty Name="creador_id" ColumnName="creador_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="CdisMartModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CdisMartModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CdisMartModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="HistorialSubasta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="subasta_id" Type="int" Nullable="false" />
+          <Property Name="usuario_id" Type="int" Nullable="false" />
+          <Property Name="monto" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="Subasta">
           <Key>
             <PropertyRef Name="id" />
@@ -13,7 +23,10 @@
           <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="100" />
           <Property Name="fecha_inicio" Type="date" Nullable="false" />
-          <Property Name="fecha_fin" Type="date" Nullable="false" />
+          <Property Name="fecha_cierre" Type="date" Nullable="false" />
+          <Property Name="monto_mas_alto" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="ganador_id" Type="int" />
+          <Property Name="creador_id" Type="int" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -24,67 +37,233 @@
           <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nombre_usuario" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Subasta">
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="1" />
+          <End Role="HistorialSubasta" Type="Self.HistorialSubasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subasta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistorialSubasta">
+              <PropertyRef Name="subasta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="HistorialSubasta" Type="Self.HistorialSubasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistorialSubasta">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioCreador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subasta">
+              <PropertyRef Name="creador_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioGanador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subasta">
+              <PropertyRef Name="ganador_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CdisMartModelStoreContainer">
+          <EntitySet Name="HistorialSubasta" EntityType="Self.HistorialSubasta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subasta" EntityType="Self.Subasta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Subasta" Association="Self.FK_Subasta">
+            <End Role="Subasta" EntitySet="Subasta" />
+            <End Role="HistorialSubasta" EntitySet="HistorialSubasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario" Association="Self.FK_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="HistorialSubasta" EntitySet="HistorialSubasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioCreador" Association="Self.FK_UsuarioCreador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Subasta" EntitySet="Subasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioGanador" Association="Self.FK_UsuarioGanador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Subasta" EntitySet="Subasta" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CdisMartModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="CdisMartEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Usuario" EntityType="CdisMartModel.Usuario" />
-          <EntitySet Name="Subasta" EntityType="CdisMartModel.Subasta" />
-        </EntityContainer>
-        <EntityType Name="Usuario">
+        <EntityType Name="HistorialSubasta">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="nombre_usuario" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="contrasena" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="subasta_id" Type="Int32" Nullable="false" />
+          <Property Name="usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="monto" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Subasta" Relationship="Self.FK_Subasta" FromRole="HistorialSubasta" ToRole="Subasta" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario" FromRole="HistorialSubasta" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Subasta">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_cierre" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="monto_mas_alto" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="ganador_id" Type="Int32" />
+          <Property Name="creador_id" Type="Int32" />
+          <NavigationProperty Name="HistorialSubasta" Relationship="Self.FK_Subasta" FromRole="Subasta" ToRole="HistorialSubasta" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_UsuarioCreador" FromRole="Subasta" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_UsuarioGanador" FromRole="Subasta" ToRole="Usuario" />
         </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre_usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasena" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HistorialSubasta" Relationship="Self.FK_Usuario" FromRole="Usuario" ToRole="HistorialSubasta" />
+          <NavigationProperty Name="Subasta" Relationship="Self.FK_UsuarioCreador" FromRole="Usuario" ToRole="Subasta" />
+          <NavigationProperty Name="Subasta1" Relationship="Self.FK_UsuarioGanador" FromRole="Usuario" ToRole="Subasta" />
+        </EntityType>
+        <Association Name="FK_Subasta">
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="1" />
+          <End Role="HistorialSubasta" Type="Self.HistorialSubasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subasta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistorialSubasta">
+              <PropertyRef Name="subasta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="HistorialSubasta" Type="Self.HistorialSubasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistorialSubasta">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioCreador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subasta">
+              <PropertyRef Name="creador_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioGanador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subasta">
+              <PropertyRef Name="ganador_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CdisMartEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HistorialSubasta" EntityType="Self.HistorialSubasta" />
+          <EntitySet Name="Subasta" EntityType="Self.Subasta" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Subasta" Association="Self.FK_Subasta">
+            <End Role="Subasta" EntitySet="Subasta" />
+            <End Role="HistorialSubasta" EntitySet="HistorialSubasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario" Association="Self.FK_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="HistorialSubasta" EntitySet="HistorialSubasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioCreador" Association="Self.FK_UsuarioCreador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Subasta" EntitySet="Subasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioGanador" Association="Self.FK_UsuarioGanador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Subasta" EntitySet="Subasta" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CdisMartModelStoreContainer" CdmEntityContainer="CdisMartEntities">
-        <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="CdisMartModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="apellido" ColumnName="apellido" />
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <EntitySetMapping Name="HistorialSubasta">
+            <EntityTypeMapping TypeName="CdisMartModel.HistorialSubasta">
+              <MappingFragment StoreEntitySet="HistorialSubasta">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="subasta_id" ColumnName="subasta_id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Subasta">
             <EntityTypeMapping TypeName="CdisMartModel.Subasta">
               <MappingFragment StoreEntitySet="Subasta">
-                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
-                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
+                <ScalarProperty Name="monto_mas_alto" ColumnName="monto_mas_alto" />
+                <ScalarProperty Name="ganador_id" ColumnName="ganador_id" />
+                <ScalarProperty Name="creador_id" ColumnName="creador_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="CdisMartModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

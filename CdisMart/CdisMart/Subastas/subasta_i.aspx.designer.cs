@@ -51,13 +51,13 @@ namespace CdisMart.Subastas
         protected global::System.Web.UI.WebControls.TextBox txtFecha;
 
         /// <summary>
-        /// rfv_fechaInicio control.
+        /// rfv_fecha control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_fechaInicio;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_fecha;
 
         /// <summary>
         /// txtDescripcion control.

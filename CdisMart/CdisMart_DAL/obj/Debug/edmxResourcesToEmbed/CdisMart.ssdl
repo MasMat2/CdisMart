@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="CdisMartModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="HistorialSubasta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="subasta_id" Type="int" Nullable="false" />
+    <Property Name="usuario_id" Type="int" Nullable="false" />
+    <Property Name="monto" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+    <Property Name="fecha" Type="date" Nullable="false" />
+  </EntityType>
   <EntityType Name="Subasta">
     <Key>
       <PropertyRef Name="id" />
@@ -8,7 +18,10 @@
     <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="descripcion" Type="varchar" MaxLength="100" />
     <Property Name="fecha_inicio" Type="date" Nullable="false" />
-    <Property Name="fecha_fin" Type="date" Nullable="false" />
+    <Property Name="fecha_cierre" Type="date" Nullable="false" />
+    <Property Name="monto_mas_alto" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="ganador_id" Type="int" />
+    <Property Name="creador_id" Type="int" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -19,10 +32,75 @@
     <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="nombre_usuario" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="contrasena" Type="varchar" MaxLength="10" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Subasta">
+    <End Role="Subasta" Type="Self.Subasta" Multiplicity="1" />
+    <End Role="HistorialSubasta" Type="Self.HistorialSubasta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subasta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="HistorialSubasta">
+        <PropertyRef Name="subasta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="HistorialSubasta" Type="Self.HistorialSubasta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="HistorialSubasta">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioCreador">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Subasta" Type="Self.Subasta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Subasta">
+        <PropertyRef Name="creador_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioGanador">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Subasta" Type="Self.Subasta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Subasta">
+        <PropertyRef Name="ganador_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="CdisMartModelStoreContainer">
+    <EntitySet Name="HistorialSubasta" EntityType="Self.HistorialSubasta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subasta" EntityType="Self.Subasta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Subasta" Association="Self.FK_Subasta">
+      <End Role="Subasta" EntitySet="Subasta" />
+      <End Role="HistorialSubasta" EntitySet="HistorialSubasta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario" Association="Self.FK_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="HistorialSubasta" EntitySet="HistorialSubasta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioCreador" Association="Self.FK_UsuarioCreador">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Subasta" EntitySet="Subasta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioGanador" Association="Self.FK_UsuarioGanador">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Subasta" EntitySet="Subasta" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -1,4 +1,4 @@
-﻿li{
+﻿li {
     margin: 0 5px;
 }
 
@@ -7,10 +7,15 @@
     justify-content: center;
 }
 
-.btnLogin{
+.btnLogin {
     margin-right: 10px;
 }
 
 a {
     text-decoration: none;
+}
+
+.table {
+    border-color: transparent;
+    /*text-align: center;*/
 }

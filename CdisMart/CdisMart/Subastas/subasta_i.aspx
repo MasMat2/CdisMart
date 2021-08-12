@@ -2,6 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Crear subasta</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container ">
@@ -17,7 +20,7 @@
             <div class="col-md-6">
                 <label for="txtFecha" class="form-label">Fecha de inicio</label>
                 <asp:TextBox ID="txtFecha" runat="server" autocomplete="off" class="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfv_fechaInicio" runat="server"
+                <asp:RequiredFieldValidator ID="rfv_fecha" runat="server"
                     ErrorMessage="*" ControlToValidate="txtFecha"
                     ValidationGroup="vlg1" Display="Dynamic"></asp:RequiredFieldValidator>
 
@@ -30,7 +33,7 @@
                     ControlToValidate="txtDescripcion" ValidationGroup="vlg1" Display="Dynamic"></asp:RequiredFieldValidator>
             </div>
             <div class="col-md-12">
-                <asp:Button ID="Button1" runat="server" Text="Registrar" OnClick="btnCrearClick" ValidationGroup="vlg1" class="btn btn-primary" />
+                <asp:Button ID="Button1" runat="server" Text="Crear subasta" OnClick="btnCrearClick" ValidationGroup="vlg1" class="btn btn-primary" />
             </div>
         </form>
     </div>

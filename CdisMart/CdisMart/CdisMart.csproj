@@ -74,6 +74,8 @@
     <Content Include="Notes\database.txt" />
     <Content Include="Notes\Notes.txt" />
     <Content Include="Signin.aspx" />
+    <Content Include="Subastas\listado.aspx" />
+    <Content Include="Subastas\subasta.aspx" />
     <Content Include="Subastas\subasta_i.aspx" />
     <Content Include="Usuarios\index.aspx" />
     <Content Include="Usuarios\Login.aspx" />
@@ -102,6 +104,20 @@
     </Compile>
     <Compile Include="Signin.aspx.designer.cs">
       <DependentUpon>Signin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Subastas\listado.aspx.cs">
+      <DependentUpon>listado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Subastas\listado.aspx.designer.cs">
+      <DependentUpon>listado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Subastas\subasta.aspx.cs">
+      <DependentUpon>subasta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Subastas\subasta.aspx.designer.cs">
+      <DependentUpon>subasta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Subastas\Subastas.Master.cs">
       <DependentUpon>Subastas.Master</DependentUpon>

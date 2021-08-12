@@ -20,5 +20,32 @@ namespace CdisMart_DAL
             modelo.Subasta.Add(subasta);
             modelo.SaveChanges();
         }
+
+        public List<Subasta> cargarSubastas()
+        {
+            var subastas = from mSubasta in modelo.Subasta
+                           select mSubasta;
+
+            return subastas.AsEnumerable<Subasta>().ToList();
+        }
+
+        public Subasta cargarSubasta(int id)
+        {
+            var subasta = (from mSubasta in modelo.Subasta
+                           where mSubasta.id == id
+                           select mSubasta).FirstOrDefault();
+
+            return subasta;
+        }
+
+        public List<Subasta> obtenerSubastasActivas(Usuario user)
+        {
+            var subastas = from mSubasta in modelo.Subasta
+                           where mSubasta.creador_id == user.id && mSubasta.fecha_inicio <= DateTime.Now
+                           && mSubasta.fecha_cierre >= DateTime.Now
+                           select mSubasta;
+
+            return subastas.AsEnumerable<Subasta>().ToList();
+        }
     }
 }

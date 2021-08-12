@@ -4,6 +4,7 @@
 	descripcion varchar(100),
 	fecha_inicio date not null,
 	fecha_fin date not null,
+	activa bit not null,
 	constraint PK_Subasta primary key (id)
 )
 
@@ -17,3 +18,49 @@ create table Usuario(
 	constraint PK_Usuario primary key (id)
 )
 
+create table SubastaUsuario(
+	id int not null identity(1,1),
+	usuario_id int not null,
+	subasta_id int unique not null,
+	constraint PK_SubastaUsuario primary key (id),
+	constraint FK_Usuario foreign key (usuario_id) references Usuario(id),
+	constraint FK_Subasta foreign key (subasta_id) references Subasta(id)
+)
+
+-----------------------------------------------------------------------------------
+
+use CdisMart
+create table Subasta(
+	id int not null identity(1,1),
+	nombre varchar(50) not null,
+	descripcion varchar(100),
+	fecha_inicio date not null,
+	fecha_cierre date not null,
+	monto_mas_alto decimal(9,2),
+	ganador_id int,
+	creador_id int,
+	constraint PK_Subasta primary key (id),
+	constraint FK_UsuarioGanador foreign key (ganador_id) references Usuario(id),
+	constraint FK_UsuarioCreador foreign key (creador_id) references Usuario(id)
+)
+
+create table HistorialSubasta(
+	id int not null,
+	subasta_id int not null,
+	usuario_id int not null,
+	monto decimal(9,2) not null,
+	fecha date not null,
+	constraint PK_HistorialSubasta primary key (id),
+	constraint FK_Subasta foreign key (subasta_id) references Subasta(id),
+	constraint FK_Usuario foreign key (usuario_id) references Usuario(id)
+)
+
+create table Usuario(
+	id int not null identity(1,1),
+	nombre varchar(50) not null,
+	apellido varchar(50) not null,
+	email varchar(50) not null,
+	nombre_usuario varchar(10) not null,
+	contrasena varchar(50) not null,
+	constraint PK_Usuario primary key (id)
+)

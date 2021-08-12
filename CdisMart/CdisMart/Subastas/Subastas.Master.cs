@@ -6,22 +6,29 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using CdisMart_DAL;
 using CdisMart_BLL;
-using System.Web.Mvc;
 
 namespace CdisMart.Subastas
 {
     public partial class Subastas : System.Web.UI.MasterPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
             UsuarioDAL userDAL = new UsuarioDAL();
             Usuario userObject;
             userObject = userDAL.consultarNombreUsuario("TomScott");
-            Session["usuario"] = userObject; 
+            Session["usuario"] = userObject;
+            lblNombre.Text = userObject.nombre_usuario;
         }
 
-        public ActionResult Students()
-        { 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            UsuarioBLL userBLL = new UsuarioBLL();
+            string nombreCompleto = userBLL.obtenerNombreCompleto((Usuario)Session["usuario"]);
+            lblNombre.Text = nombreCompleto;
         }
-        }
+
+        //public ActionResult Students()
+        //{ 
+        //}
+    }
 }

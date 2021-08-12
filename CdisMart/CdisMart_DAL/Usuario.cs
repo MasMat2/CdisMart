@@ -14,11 +14,22 @@ namespace CdisMart_DAL
     
     public partial class Usuario
     {
+        public Usuario()
+        {
+            this.HistorialSubasta = new HashSet<HistorialSubasta>();
+            this.Subasta = new HashSet<Subasta>();
+            this.Subasta1 = new HashSet<Subasta>();
+        }
+    
         public int id { get; set; }
         public string nombre { get; set; }
+        public string apellido { get; set; }
         public string email { get; set; }
         public string nombre_usuario { get; set; }
         public string contrasena { get; set; }
-        public string apellido { get; set; }
+    
+        public virtual ICollection<HistorialSubasta> HistorialSubasta { get; set; }
+        public virtual ICollection<Subasta> Subasta { get; set; }
+        public virtual ICollection<Subasta> Subasta1 { get; set; }
     }
 }

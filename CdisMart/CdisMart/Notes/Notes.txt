@@ -1,2 +1,5 @@
 ﻿Check form validation messages
 Preferably if implment with bootstrap
+
+
+change page_init to page_load on subastas master, and delete auto add user feature

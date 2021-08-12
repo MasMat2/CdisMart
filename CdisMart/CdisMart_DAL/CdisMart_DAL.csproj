@@ -63,6 +63,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CdisMart.edmx</DependentUpon>
     </Compile>
+    <Compile Include="HistorialSubasta.cs">
+      <DependentUpon>CdisMart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subasta.cs">
       <DependentUpon>CdisMart.tt</DependentUpon>

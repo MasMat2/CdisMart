@@ -25,7 +25,8 @@ namespace CdisMart_DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<HistorialSubasta> HistorialSubasta { get; set; }
         public DbSet<Subasta> Subasta { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
     }
 }

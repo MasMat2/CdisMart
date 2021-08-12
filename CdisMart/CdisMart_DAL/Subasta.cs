@@ -14,10 +14,22 @@ namespace CdisMart_DAL
     
     public partial class Subasta
     {
+        public Subasta()
+        {
+            this.HistorialSubasta = new HashSet<HistorialSubasta>();
+        }
+    
         public int id { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }
         public System.DateTime fecha_inicio { get; set; }
-        public System.DateTime fecha_fin { get; set; }
+        public System.DateTime fecha_cierre { get; set; }
+        public Nullable<decimal> monto_mas_alto { get; set; }
+        public Nullable<int> ganador_id { get; set; }
+        public Nullable<int> creador_id { get; set; }
+    
+        public virtual ICollection<HistorialSubasta> HistorialSubasta { get; set; }
+        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
     }
 }

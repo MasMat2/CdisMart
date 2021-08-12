@@ -23,7 +23,8 @@ namespace CdisMart.Subastas
                 }
                 else
                 {
-                    Response.Redirect("~/Usuarios/Login.aspx");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('Subasta creada exitosamente')", true);
+
                 }
             }
 
@@ -44,9 +45,17 @@ namespace CdisMart.Subastas
             Subasta subasta = new Subasta();
             subasta.nombre = txtNombre.Text;
             subasta.descripcion = txtDescripcion.Text;
-            (subasta.fecha_inicio, subasta.fecha_fin) = parseDateText();
+            (subasta.fecha_inicio, subasta.fecha_cierre) = parseDateText();
             SubastaBLL subastaBLL = new SubastaBLL();
-            subastaBLL.crearSubasta(subasta);
+            try
+            {
+                subastaBLL.crearSubasta(subasta, (Usuario)Session["usuario"]);
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", String.Format("alert('{0}')", ex.Message), true);
+            }
+            
         }
         #endregion
 

@@ -38,5 +38,10 @@ namespace CdisMart_BLL
             }
         }
 
+        public String obtenerNombreCompleto(Usuario user)
+        {
+            return String.Format("{0} {1}", user.nombre, user.apellido);
+        }
+
     }
 }
